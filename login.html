@@ -19,11 +19,24 @@
 <body>
   <main class="mt-5">
     <div class="container">
-      <div class="alert alert-danger text-center" role="alert">
-        <h4 class="alert-heading">Funcionalidad en desarrollo</h4>
-      </div>
+      <main class="signin">
+        <img class="mb-4" src="img/login.png" alt="" width="100%">
+        <h1 class="h3 mb-3 fw-normal">Inicio de sesión</h1>
+    
+        <div class="form-floating">
+          <input type="email" class="form-control" id="email" placeholder="Email">
+          <label for="floatingInput">Email</label>
+        </div>
+        <div class="form-floating">
+          <input type="password" class="form-control" id="clave" placeholder="Contraseña">
+          <label for="floatingPassword">Contraseña</label>
+        </div>
+
+        <button class="w-100 btn btn-lg btn-primary" id="envio">Ingresar</button>
+      </main>
     </div>
   </main>
+
   <footer class="text-muted">
     <div class="container">
       <p class="float-end">
@@ -34,6 +47,11 @@
       <p>Clickea <a target="_blank" href="Letra.pdf">aquí</a> para descargar la letra del obligatorio.</p>
     </div>
   </footer>
+
+  <div class="alert alert-danger alert-dismissible fade" role="alert" id="alert-danger">
+    <p>Debe completar todos los campos</p>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
   <script src="js/login.js"></script>
 </body>
 
