@@ -39,3 +39,14 @@ let getJSONData = function(url){
         return result;
     });
 }
+
+function logueado(){
+  let email = localStorage.getItem("user"); //variable que toma elemento de localStorage
+  if(email === null){
+    alert("Debe iniciar sesión");
+    location.href="login.html"; //redirecciona a login
+  }else{
+  document.getElementById("usuario").innerHTML = email;
+}
+};
+    

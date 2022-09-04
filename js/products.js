@@ -20,7 +20,7 @@ function showProductsList(array){
             <div class="col">
                 <div class="d-flex w-100 justify-content-between">
                     <div class="mb-1">
-                    <h4>`+ products.name + '-' + products.currency + + products.cost + `</h4> 
+                    <h4>`+ products.name + ' - ' + products.currency + ' ' + products.cost + `</h4> 
                     <p> `+ products.description +`</p> 
                     </div>
                     <small class="text-muted">` + products.soldCount + ` vendidos</small> 
@@ -31,10 +31,13 @@ function showProductsList(array){
     </div>
             `
         document.getElementById("prod-list-container").innerHTML = htmlContentToAppend;
+        
         }
+        document.getElementById("bajadaTitulo").innerHTML += array.catName;
     };
 
     document.addEventListener("DOMContentLoaded", function(e){
+        logueado();
         getJSONData(PRODUCTS_URL).then(function(resultObj){
             if (resultObj.status === "ok")
             {
@@ -42,4 +45,5 @@ function showProductsList(array){
                 showProductsList(productsArray);
             }
         });
+
     });

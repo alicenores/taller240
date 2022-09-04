@@ -1,12 +1,5 @@
 document.addEventListener("DOMContentLoaded", function(){
-    let email = localStorage.getItem("user");
-
-    if(email == null){
-        alert("Debe iniciar sesión");
-        location.href="login.html";
-    }else{
-        document.getElementById("usuario").innerHTML = email;
-    }
+    logueado();
 
     document.getElementById("autos").addEventListener("click", function() {
         localStorage.setItem("catID", 101);
