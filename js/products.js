@@ -37,10 +37,10 @@ function sortProducts(criteria, array){ //funcion con dos parametros(uno array)
 
 function setProdID(id) { //Funcion que guarda el id de cada producto
     localStorage.setItem("prodID", id);
-    window.location = "products-info.html"
+    window.location = "product-info.html"
 };
 
-function showProductsList(){ //funcion que muestra una lista con parametro array
+function showProductsList(){ //funcion que muestra una lista
 
     let htmlContentToAppend = "";  //
     for(let i = 0; i < productsArray.products.length; i++){ //variable i inicia en 0 y se incrementa hasta que sea < a extension de array.products 
@@ -51,7 +51,7 @@ function showProductsList(){ //funcion que muestra una lista con parametro array
        
         //codigo que se repite 
         htmlContentToAppend += ` 
-        <div class="list-group-item list-group-item-action">
+        <div onclick="setProdID(${products.id})" class="list-group-item list-group-item-action">
         <div class="row">
             <div class="col-3">
                 <img src="` + products.image + `" alt="product image" class="img-thumbnail">
@@ -82,7 +82,7 @@ function showProductsList(){ //funcion que muestra una lista con parametro array
     
         products = sortProducts(currentSortCriteria, products); //utiliza la funcion que ordena
     
-        showProductsList(); //Muestra las categorías ordenadas
+        showProductsList(); //Muestra los productos ordenados
     };
     
     //cuando carga la pagina

@@ -33,12 +33,12 @@ function sortCategories(criteria, array){ //funcion con dos parametros(uno array
     }
 
     return result;
-}
+};
 
 function setCatID(id) { //Funcion que guarda el id de cada categoria
     localStorage.setItem("catID", id);
     window.location = "products.html"
-}
+};
 
 function showCategoriesList(){ //muestra el listado de categorias
 
@@ -69,7 +69,7 @@ function showCategoriesList(){ //muestra el listado de categorias
 
         document.getElementById("cat-list-container").innerHTML = htmlContentToAppend;
     }
-}
+};
 
 function sortAndShowCategories(sortCriteria, categoriesArray){ //ordena y muestra el listado
     currentSortCriteria = sortCriteria;
