@@ -3,41 +3,53 @@ let comments = [];
 
 function showProduct(array){ //funcion que muestra los productos 
 
-    let htmlContentToAppend = ""; 
+    let htmlContentToAppend = "";
         let prodInfo = array; { 
 
         htmlContentToAppend += ` 
-        <div>
-         <h1 class="fw-bold">`+ prodInfo.name + `</h1>
-         <hr>
-         <p class="fw-bold fs-5">Precio</p>
-         <p> `+ prodInfo.currency + " " + prodInfo.cost +`</p>
-         <p class="fw-bold fs-5">Descripcion</p>
-         <p> `+ prodInfo.description +`</p>
-         <p class="fw-bold fs-5">Categoria</p>
-         <p> `+ prodInfo.category +`</p>
-         <p class="fw-bold fs-5">Cantidad de vendidos</p>
-         <p> `+ prodInfo.soldCount +`</p>
-         <p class="fw-bold fs-5">Imagenes ilustrativas</p>
-        <div class="row">
-            <div class="col-3">
-                <img src="` + prodInfo.images[0] + `" alt="product image" class="img-thumbnail">
-            </div>
-            <div class="col-3">
-            <img src="` + prodInfo.images[1] + `" alt="product image" class="img-thumbnail">
-            </div>
-            <div class="col-3">
-                <img src="` + prodInfo.images[2] + `" alt="product image" class="img-thumbnail">
-            </div>
-            <div class="col-3">
-                <img src="` + prodInfo.images[3] + `" alt="product image" class="img-thumbnail">
-            </div>
+        <div class="container">
+         <div class="row">
+          <h1 class="display-4 fw-bold">`+ prodInfo.name + `</h1>
+        <hr>
+          <div class="col-6">
+            <p class="display-6"> `+ prodInfo.currency + " " + prodInfo.cost +`</p>
+           <p class="fw-bold fs-5">Descripción</p>
+            <p> `+ prodInfo.description +`</p>
+           <p class="fw-bold fs-5">Categoría</p>
+            <p> `+ prodInfo.category +`</p>
+           <p class="fw-bold fs-5">Cantidad de vendidos</p>
+            <p> `+ prodInfo.soldCount +`</p>
+          </div>
+          <div class="col-6">
+           <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+             <div class="carousel-item active">
+              <img src="` + prodInfo.images[0] + `" class="d-block w-100" alt="product image">
+             </div>
+             <div class="carousel-item">
+              <img src="` + prodInfo.images[1] + `" class="d-block w-100" alt="product image">
+             </div>
+             <div class="carousel-item">
+              <img src="` + prodInfo.images[2] + `" class="d-block w-100" alt="product image">
+             </div>
+             <div class="carousel-item">
+              <img src="` + prodInfo.images[3] + `" class="d-block w-100" alt="product image">
+             </div>
+             <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Previous</span>
+             </button>
+             <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Next</span>
+             </button>
+          </div>
+         </div>
         </div>
-        </div>
-        `
+         `
         }
         document.getElementById("prod-container").innerHTML = htmlContentToAppend; //se agrega el codigo al html
-        };   
+    };   
         
     function showComments(array){
         
@@ -52,23 +64,40 @@ function showProduct(array){ //funcion que muestra los productos
                 }
             }
                 htmlContentToAppend += `
-                <div class="list-group-item">
-                    <div class="row">
-                        <div class="col">
-                            <div class="d-flex w-100 justify-content-between">
-                                <p class="fw-bold mb-1">${comment.user}</p>
-                                <small class="text-muted">${comment.dateTime}</small>
-                            </div>
-                            <p class="mb-1">${comment.description}</p>
-                            <span>` + estrellita + `</span>
-                        </div>
-                    </div>
+                <div class="col-6 list-group-item">
+                <div class="d-flex w-100 justify-content-between">
+                 <h5 class="mb-1">${comment.user}</h5>
+                 <small>${estrellita}</small>
+                </div>
+                <p class="mb-1">${comment.description}</p>
+                <small>${comment.dateTime}</small>
                 </div>
                 `
             }
-    
             document.getElementById("comments-container").innerHTML = htmlContentToAppend;
         }
+    };
+
+    function setProdID(id) { //Función que guarda el id del producto
+        localStorage.setItem("prodID", id);
+        window.location = "product-info.html"
+    };
+
+    function showRelatedProducts(array){ //Función que muestra los productos relacionados
+
+        let htmlContentToAppend = "";
+        for(let i = 0; i < array.relatedProducts.length; i++){ //recorre la longitud del arreglo relatedProducts
+        let prodInfo = array; { 
+
+        htmlContentToAppend += ` 
+            <div onclick="setProdID(${prodInfo.relatedProducts[i].id})" class="col-3">
+                <img src="` + prodInfo.relatedProducts[i].image + `" alt="product image" class="img-thumbnail">
+                <p class="mb-1">${prodInfo.relatedProducts[i].name}</p>
+            </div>
+        `
+    }
+    document.getElementById("oProd-container").innerHTML = htmlContentToAppend; //se agrega el codigo al html
+    }
     };
 
     //cuando carga la pagina
@@ -80,6 +109,7 @@ function showProduct(array){ //funcion que muestra los productos
             if (resultObj.status === "ok"){
                productInfo = resultObj.data;   
             } showProduct(productInfo);
+              showRelatedProducts(productInfo);
         });
         
         getJSONData(PRODUCT_INFO_COMMENTS_URL+idProducto+EXT_TYPE).then(function(resultObj){ //concatena url+constante con id+constante ".json"
@@ -87,4 +117,5 @@ function showProduct(array){ //funcion que muestra los productos
                comments = resultObj.data;   
             } showComments(comments);
         });
+        
     });

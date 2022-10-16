@@ -47,7 +47,12 @@ function logueado(){
     alert("Debe iniciar sesión");
     location.href="login.html"; //redirecciona a login
   }else{
-  document.getElementById("usuario").innerHTML = email; //coloca el mail en la barra de navegacion
+  document.getElementById("dropdownMenuButton1").innerHTML = email; //coloca el mail en la barra de navegacion
 }
 };
+
+function cerrarSesion(){
+  localStorage.removeItem('user'); //elimina el item "user" de localStorage
+  location.href="login.html"; //redirecciona a login
+}
     

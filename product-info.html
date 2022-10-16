@@ -30,9 +30,15 @@
           <li class="nav-item">
             <a class="nav-link" href="sell.html">Vender</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" id="usuario"></a>
-          </li>
+          <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+              <li><a class="dropdown-item" href="cart.html">Mi carrito</a></li>
+              <li><a class="dropdown-item" href="my-profile.html">Mi perfil</a></li>
+              <li><a onclick="cerrarSesion()" class="dropdown-item" >Cerrar sesión</a></li>
+            </ul>
+          </div>
         </ul>
       </div>
     </div>
@@ -47,7 +53,7 @@
   <br>
   <div class="container">
     <h3>Comentarios</h3>
-    <div class="sinclase" id="comments-container">
+    <div class="list-group" id="comments-container">
     </div>
     <br>
     <h3>Comentar</h3>
@@ -67,6 +73,15 @@
               </select>
     </div>
     <button type="button" class="btn btn-primary" id="boton">Enviar</button>
+    <hr>
+  </div>
+  
+  <div class="container">
+  <h3>Productos relacionados</h3>
+  <div class="container" >
+    <div class="row" id="oProd-container">
+    </div>
+  </div>
   </div>
   
   </main>
