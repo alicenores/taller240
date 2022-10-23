@@ -9,18 +9,18 @@ function showProduct(array){ //funcion que muestra los productos
         htmlContentToAppend += ` 
         <div class="container">
          <div class="row">
-          <h1 class="display-4 fw-bold">`+ prodInfo.name + `</h1>
-        <hr>
-          <div class="col-6">
-            <p class="display-6"> `+ prodInfo.currency + " " + prodInfo.cost +`</p>
-           <p class="fw-bold fs-5">Descripción</p>
-            <p> `+ prodInfo.description +`</p>
-           <p class="fw-bold fs-5">Categoría</p>
-            <p> `+ prodInfo.category +`</p>
-           <p class="fw-bold fs-5">Cantidad de vendidos</p>
-            <p> `+ prodInfo.soldCount +`</p>
+          <div class="col">
+          <h1 class="fw-bold p-2">`+ prodInfo.name + `</h1> 
           </div>
-          <div class="col-6">
+        <hr>
+          <div class="col-6 p-4">
+          <p class="display-6"> `+ prodInfo.currency + " " + prodInfo.cost +`</p>
+          <p><span class="fw-bold fs-5">Descripción</span> <br> `+ prodInfo.description +`</p>
+          <p><span class="fw-bold fs-5">Categoría</span> <br>`+ prodInfo.category +`</p>
+          <p><span class="fw-bold fs-5">Cantidad de vendidos</span> <br>`+ prodInfo.soldCount +`</p>
+          <button type="button" class="btn btn-success my-2" onclick="addToCart(${prodInfo.images[0]}, ${prodInfo.name}, ${prodInfo.cost}, ${prodInfo.currency})">Comprar</button>
+          </div>
+          <div class="col-6 p-4">
            <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
              <div class="carousel-item active">
@@ -64,7 +64,7 @@ function showProduct(array){ //funcion que muestra los productos
                 }
             }
                 htmlContentToAppend += `
-                <div class="col-6 list-group-item">
+                <div class="list-group-item">
                 <div class="d-flex w-100 justify-content-between">
                  <h5 class="mb-1">${comment.user}</h5>
                  <small>${estrellita}</small>
@@ -83,6 +83,13 @@ function showProduct(array){ //funcion que muestra los productos
         window.location = "product-info.html"
     };
 
+    function addToCart(img, name, cost, currency){
+        localStorage.setItem("image", img);
+        localStorage.setItem("name", name);
+        localStorage.setItem("unitCost", cost);
+        localStorage.setItem("currency", currency);
+    }
+
     function showRelatedProducts(array){ //Función que muestra los productos relacionados
 
         let htmlContentToAppend = "";
@@ -90,9 +97,9 @@ function showProduct(array){ //funcion que muestra los productos
         let prodInfo = array; { 
 
         htmlContentToAppend += ` 
-            <div onclick="setProdID(${prodInfo.relatedProducts[i].id})" class="col-3">
+            <div onclick="setProdID(${prodInfo.relatedProducts[i].id})" class="col-3 py-2 mx-0">
                 <img src="` + prodInfo.relatedProducts[i].image + `" alt="product image" class="img-thumbnail">
-                <p class="mb-1">${prodInfo.relatedProducts[i].name}</p>
+                <p class="mt-2">${prodInfo.relatedProducts[i].name}</p>
             </div>
         `
     }

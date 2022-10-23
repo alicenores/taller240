@@ -44,9 +44,89 @@
   </nav>
   <main>
     <div class="container">
-      <div class="alert alert-danger text-center" role="alert">
-        <h4 class="alert-heading">Funcionalidad en desarrollo</h4>
+      <div class="text-center p-4">
+        <h2>Carrito de compras</h2>
       </div>
+      <h5 class="mb-3">Artículos a comprar</h5>
+      <div class="col-md mb-3" id="articulos">
+      </div>
+      <form class="needs-validation" novalidate id="cart">
+      <hr class="mb-4">
+          <h5 class="mb-3">Tipo de envío</h5>
+          <div class="d-block my-3">
+            <div class="custom-control custom-radio">
+              <input id="goldradio" name="publicationType" type="radio" class="custom-control-input" checked=""
+                required="">
+              <label class="custom-control-label" for="premiumradio">Premiun 2 a 5 días (15%)</label>
+            </div>
+            <div class="custom-control custom-radio">
+              <input id="premiumradio" name="publicationType" type="radio" class="custom-control-input" required="">
+              <label class="custom-control-label" for="expressradio">Express 5 a 8 días (7%)</label>
+            </div>
+            <div class="custom-control custom-radio">
+              <input id="standardradio" name="publicationType" type="radio" class="custom-control-input" required="">
+              <label class="custom-control-label" for="standardradio">Estándar 12 a 15 días (3%)</label>
+            </div>
+          </div>
+          <h5 class="mb-3">Dirección de envío</h5>
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="productName">Calle</label>
+              <input type="text" class="form-control" id="calle" name="calle" required>
+              <div class="invalid-feedback">
+                Ingresa una calle
+              </div>
+            </div>
+            <div class="col-md-4 mb-3">
+              <label for="productName">Número</label>
+              <input type="text" inputmode="numeric" class="form-control" id="numero" name="numero" required>
+              <div class="invalid-feedback">
+                Ingresa un número
+              </div>
+            </div>
+            <div class="col-md-6 mb-3">
+              <label for="productName">Esquina</label>
+              <input type="text" class="form-control" id="esquina" name="esquina" required>
+              <div class="invalid-feedback">
+                Ingresa la esquina
+              </div>
+            </div>
+          </div>
+          <hr class="mb-4">
+          <h4 class="mb-3">Costos</h4>
+          <ul class="list-group mb-3">
+            <li class="list-group-item d-flex justify-content-between lh-condensed">
+              <div>
+                <h6 class="my-0">Subtotal</h6>
+                <small class="text-muted">Costo unitario del producto por cantidad</small>
+              </div>
+              <span class="text-muted" id="subtotalText">-</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between lh-condensed">
+              <div>
+                <h6 class="my-0">Costo de envío</h6>
+                <small class="text-muted">Según el tipo de envío</small>
+              </div>
+              <span class="text-muted" id="envioText">-</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between">
+              <span>Total ($)</span>
+              <strong id="totalText">-</strong>
+            </li>
+          </ul>
+          <hr class="mb-4">
+          <h4 class="mb-3">Forma de pago</h4>
+          <div class="row">
+          <p id="formaDePago">No ha seleccionado<button type="button" class="m-1 btn btn-link" data-bs-toggle="modal"
+            data-bs-target="#modalPago">Seleccionar</button></p> 
+          <div id="invalidCheck3Feedback" class="invalid-feedback">
+            Debe seleccionar una forma de pago.
+          </div>
+          </div>
+          <div class="col-12">
+          <button class="btn btn-primary btn-lg w-100" type="submit">Finalizar compra</button>
+          </div>
+      </form>
     </div>
   </main>
   <footer class="text-muted">
@@ -59,6 +139,52 @@
       <p>Clickea <a target="_blank" href="Letra.pdf">aquí</a> para descargar la letra del obligatorio.</p>
     </div>
   </footer>
+
+  <div class="modal fade" tabindex="-1" role="dialog" id="modalPago">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Forma de pago</h5>
+        </div>
+        <div class="modal-body">
+          <div class="container">
+            <form action="">
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="flexRadioDefault" id="tarjetaCredito">
+              <label class="form-check-label" for="tarjetaCredito">Tarjeta de crédito</label>
+            <hr>
+              <div class="row">
+              <div class="col-6 py-2">
+                <label for="numeroTarjeta" class="form-label">Número de tarjeta</label>
+                <input type="text" class="form-control" id="numeroTarjeta" required>
+              </div>
+              <div class="col-6 py-2">
+                <label for="codSeguridad" class="form-label">Código de seg.</label>
+                <input type="text" class="form-control" id="codSeguridad" required>
+              </div>
+              </div>
+              <div class="col-12 py-2">
+                <label for="vencimiento" class="form-label">Vencimiento (MM/AA)</label>
+                <input type="text" class="form-control" id="vencimiento" required>
+              </div>
+            </div>
+            <div class="form-check pt-1">
+              <input class="form-check-input" type="radio" name="flexRadioDefault" id="transferencia">
+              <label class="form-check-label" for="transferencia">Transferencia bancaria</label>
+            <hr>
+            <label for="numCuenta" class="form-label">Número de cuenta</label>
+            <input type="text" class="form-control" id="numCuenta" required>
+            </div>
+          </form>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div id="spinner-wrapper">
     <div class="lds-ring">
       <div></div>
