@@ -13,18 +13,18 @@ function showProduct(array){ //funcion que muestra los productos
           <h1 class="fw-bold p-2">`+ prodInfo.name + `</h1> 
           </div>
         <hr>
-          <div class="col-6 p-4">
-          <p class="display-6"> `+ prodInfo.currency + " " + prodInfo.cost +`</p>
+          <div class="col-12 col-md-6 p-4">
+          <p class="display-6" id="prodMoneda">`+ prodInfo.currency +`</p><p class="display-6" id="prodCosto">`+ prodInfo.cost +`</p>
           <p><span class="fw-bold fs-5">Descripción</span> <br> `+ prodInfo.description +`</p>
           <p><span class="fw-bold fs-5">Categoría</span> <br>`+ prodInfo.category +`</p>
           <p><span class="fw-bold fs-5">Cantidad de vendidos</span> <br>`+ prodInfo.soldCount +`</p>
-          <button type="button" class="btn btn-success my-2" onclick="addToCart(${prodInfo.images[0]}, ${prodInfo.name}, ${prodInfo.cost}, ${prodInfo.currency})">Comprar</button>
+          
           </div>
-          <div class="col-6 p-4">
+          <div class="col-12 col-md-6 p-4">
            <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
              <div class="carousel-item active">
-              <img src="` + prodInfo.images[0] + `" class="d-block w-100" alt="product image">
+              <img src="` + prodInfo.images[0] + `" class="d-block w-100" alt="product image" id="prodImg">
              </div>
              <div class="carousel-item">
               <img src="` + prodInfo.images[1] + `" class="d-block w-100" alt="product image">
@@ -78,17 +78,28 @@ function showProduct(array){ //funcion que muestra los productos
         }
     };
 
+    function addComment(){
+        let usuario = localStorage.getItem("user");
+        let comentario = document.getElementById("productDescription").value;
+        let puntuacion = JSON.parse(document.getElementById("productCategory").value);
+        let hoy = new Date();// crea un nuevo objeto `Date`
+        let fecha = hoy.toLocaleString();// obtener la fecha y la hora
+        
+        let newComment = {
+            score: puntuacion,
+            description: comentario,
+            user: usuario,
+            dateTime: fecha
+        }
+        localStorage.setItem('newComment', JSON.stringify(newComment));
+        comments.push(newComment);
+        console.log(comments);
+    }
+
     function setProdID(id) { //Función que guarda el id del producto
         localStorage.setItem("prodID", id);
         window.location = "product-info.html"
     };
-
-    function addToCart(img, name, cost, currency){
-        localStorage.setItem("image", img);
-        localStorage.setItem("name", name);
-        localStorage.setItem("unitCost", cost);
-        localStorage.setItem("currency", currency);
-    }
 
     function showRelatedProducts(array){ //Función que muestra los productos relacionados
 
@@ -125,4 +136,8 @@ function showProduct(array){ //funcion que muestra los productos
             } showComments(comments);
         });
         
+        document.getElementById("btnComment").addEventListener('click', function(){
+            addComment();
+            showComments(comments);
+        })
     });

@@ -59,9 +59,65 @@
   </nav>
   <main>
     <div class="container">
-      <div class="alert alert-danger text-center" role="alert">
-        <h4 class="alert-heading">Funcionalidad en desarrollo</h4>
-      </div>
+          <div class="row mt-4 mx-5">
+             <div class="col-sm-6">
+             <h1 class="mb-1">Perfil</h1>
+             </div>
+             <div class="col-sm-6 pb-2"><img src="img/img_perfil.png" alt="" width="100" class="border rounded float-end">
+             </div>
+            <hr class="my-1">
+          </div>
+            
+            <form class="row mt-2 mx-5 needs-validation" id="formPerfil" novalidate>
+            <div class="row g-3">
+              <div class="col-12 col-md-6">
+                <label for="nombre" class="form-label">Primer nombre*</label>
+                <input type="text" class="form-control" id="nombre" required>
+                <div class="invalid-feedback">
+                  Debe ingresar un nombre.
+                </div>
+              </div>
+  
+              <div class="col-12 col-md-6">
+                <label for="segundoNombre" class="form-label">Segundo nombre</label>
+                <input type="text" class="form-control" id="segundoNombre">
+              </div>
+
+              <div class="col-12 col-md-6">
+                <label for="apellido" class="form-label">Primer apellido*</label>
+                <input type="text" class="form-control" id="apellido" required>
+                <div class="invalid-feedback">
+                  Debe ingresar un apellido.
+                </div>
+              </div>
+  
+              <div class="col-12 col-md-6">
+                <label for="segundoApellido" class="form-label">Segundo apellido</label>
+                <input type="text" class="form-control" id="segundoApellido">
+              </div>
+
+              <div class="col-12 col-md-6">
+                <label for="email" class="form-label">Email*</label>
+                <input type="email" class="form-control" id="email" required>
+                <div class="invalid-feedback">
+                  Debe ingresar un email.
+                </div>
+              </div>
+
+              <div class="col-12 col-md-6">
+                <label for="imagen" class="form-label">Imagen de perfil</label>
+                <input type="file" class="form-control" id="imgPerfil" accept=".png, .jpeg, .jpg" onchange="Uploaded()">
+              </div>
+
+              <div class="col-12 col-md-6">
+                <label for="telefono" class="form-label">Teléfono de contacto</label>
+                <input type="tel" class="form-control" id="telefono">
+              </div>
+              <hr class="mb-4">
+              <button class="btn btn-primary btn-lg" type="submit" id="guardar">Guardar cambios</button>
+
+            </div>
+        </form>
     </div>
   </main>
   <footer class="text-muted">

@@ -53,6 +53,7 @@ function logueado(){
 
 function cerrarSesion(){
   localStorage.removeItem('user'); //elimina el item "user" de localStorage
+  localStorage.removeItem('datosUsuario');
   location.href="login.html"; //redirecciona a login
 }
     
